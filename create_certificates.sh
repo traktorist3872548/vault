@@ -47,8 +47,7 @@ openssl req -config ${DIR}/openssl.cnf \
       -new -x509 -days 7300 -sha256 -extensions v3_ca \
       -out ${CA_DIR}/certs/ca.cert.pem \
       -passin pass:changeit \
-      -subj "//C=NN\ST=Unknown\L=Unknown\O=spring-cloud-vault-config\CN=CA Certificate"
-#      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=CA Certificate"
+      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=CA Certificate"
 
 echo "[INFO] Prepare CA database"
 echo 1000 > ${CA_DIR}/serial
@@ -71,8 +70,7 @@ openssl req -config ${DIR}/openssl.cnf \
       -key ${CA_DIR}/private/localhost.key.pem \
       -passin pass:changeit \
       -new -sha256 -out ${CA_DIR}/csr/localhost.csr.pem \
-      -subj "//C=NN\ST=Unknown\L=Unknown\O=spring-cloud-vault-config\CN=localhost"
-#      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=localhost"
+      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=localhost"
 
 echo "[INFO] Signing certificate request"
 openssl ca -config ${DIR}/openssl.cnf \
@@ -99,8 +97,7 @@ openssl req -config ${DIR}/openssl.cnf \
       -key ${CA_DIR}/private/client.key.pem \
       -passin pass:changeit \
       -new -sha256 -out ${CA_DIR}/csr/client.csr.pem \
-      -subj "//C=NN\ST=Unknown\L=Unknown\O=spring-cloud-vault-config\CN=client"
-#      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=client"
+      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=client"
 
 echo "[INFO] Signing certificate request"
 openssl ca -config ${DIR}/openssl.cnf \
@@ -140,8 +137,7 @@ openssl req -config ${DIR}/intermediate.cnf \
       -new -sha256 \
       -out ${CA_DIR}/csr/intermediate.csr.pem \
       -passin pass:changeit \
-      -subj "//C=NN\ST=Unknown\L=Unknown\O=spring-cloud-vault-config\CN=Intermediate CA Certificate"
-#      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=Intermediate CA Certificate"
+      -subj "/C=NN/ST=Unknown/L=Unknown/O=spring-cloud-vault-config/CN=Intermediate CA Certificate"
 
 echo "[INFO] Signing intermediate certificate request"
 openssl ca -config ${DIR}/openssl.cnf \
