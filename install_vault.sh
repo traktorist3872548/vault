@@ -44,3 +44,13 @@ mv ./vault /usr/local/bin/
 
 # check vault installation
 vault -h
+
+# copy vault config file to /etc folder
+cp ./config/vault.hcl /etc/vault.hcl 
+
+# set permissions
+chown vault:vault /etc/vault.hcl 
+chmod 640 /etc/vault.hcl 
+
+# copy systemd unit file to /etc/systemd/system
+cp config/vault.service /etc/systemd/system/vault.service
