@@ -4,6 +4,7 @@ VAULT_VER="${VAULT_VER:-1.1.3}"
 UNAME=$(uname -s |  tr '[:upper:]' '[:lower:]')
 VAULT_ZIP="vault_${VAULT_VER}_${UNAME}_amd64.zip"
 IGNORE_CERTS="${IGNORE_CERTS:-no}"
+FQDN="$(hostname -f)"
 
 # cleanup
 mkdir -p vault
@@ -54,3 +55,6 @@ chmod 640 /etc/vault.hcl
 
 # copy systemd unit file to /etc/systemd/system
 cp config/vault.service /etc/systemd/system/vault.service
+
+#add a rule in /etc/hosts to direct requests to Vault to localhost
+echo 127.0.0.1 $FQDN | tee -a /etc/hosts
