@@ -1,4 +1,15 @@
 #!/bin/bash
+# create installation folder
+if [!-d /opt/vault]; then
+    mkdir -p /opt/vault;
+fi;
+
+#create a vault system user
+#/opt/vault/keystore  will be used as the Vault data directory to store encrypted secrets on the local filesystem
+useradd -r -d /opt/vault/keystore -s /bin/nologin vault
+
+#Set the ownership of /opt/vault/keystore to the vault user and the vault group
+install -o vault -g vault -m 750 -d /opt/vault/keystore
 
 VAULT_VER="${VAULT_VER:-1.1.3}"
 UNAME=$(uname -s |  tr '[:upper:]' '[:lower:]')
@@ -41,7 +52,7 @@ chmod a+x vault
 ./vault --version
 
 # move binary to /usr/local/bin 
-mv ./vault /usr/local/bin/
+mv ./vault /opt/vault/
 
 # check vault installation
 vault -h
@@ -53,10 +64,12 @@ cp -r config/vault /etc/
 
 # set permissions
 chown vault:vault /etc/vault/vault.hcl 
-chmod 640 /etc/vault/vault.hcl 
+chmod 640 /etc/vault/vault.hcl
+chown vault:vault /opt/vault/
+chmod 640 /opt/vault/ 
 
 # copy systemd unit file to /etc/systemd/system
 cp config/vault.service /etc/systemd/system/vault.service
 
 #add a rule in /etc/hosts to direct requests to Vault to localhost
-echo 127.0.0.1 $FQDN | tee -a /etc/hosts
+#echo 127.0.0.1 $FQDN | tee -a /etc/hosts
