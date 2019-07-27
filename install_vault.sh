@@ -6,7 +6,7 @@ fi;
 
 #create a vault system user
 #/opt/vault/keystore  will be used as the Vault data directory to store encrypted secrets on the local filesystem
-useradd -r -d /opt/vault/keystore -s /bin/nologin vault
+useradd -r -d /opt/vault/keystore -s /bin/nologin vault || true
 
 #Set the ownership of /opt/vault/keystore to the vault user and the vault group
 install -o vault -g vault -m 750 -d /opt/vault/keystore
@@ -51,7 +51,7 @@ chmod a+x vault
 # check
 ./vault --version
 
-# move binary to /usr/local/bin 
+# move binary to /opt/vault 
 mv ./vault /opt/vault/
 
 # check vault installation
