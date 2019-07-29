@@ -1,8 +1,6 @@
 #!/bin/bash
 # create installation folder
-if [!-d /opt/vault]; then
-    mkdir -p /opt/vault;
-fi;
+mkdir -p /opt/vault || true
 
 #create a vault system user
 #/opt/vault/keystore  will be used as the Vault data directory to store encrypted secrets on the local filesystem
@@ -49,13 +47,13 @@ unzip ../download/${VAULT_ZIP}
 chmod a+x vault
 
 # check
-./vault --version
+/opt/vault/vault --version
 
 # move binary to /opt/vault 
 mv ./vault /opt/vault/
 
 # check vault installation
-vault -h
+/opt/vault/vault -h
 
 cd ..
 pwd
