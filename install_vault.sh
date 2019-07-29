@@ -1,13 +1,18 @@
 #!/bin/bash
 # create installation folder
-mkdir -p /opt/vault || true
+if [[ ! -d /opt/vault ]] ; then
+    mkdir -p /opt/vault
+fi
 
 #create a vault system user
 #/opt/vault/keystore  will be used as the Vault data directory to store encrypted secrets on the local filesystem
-useradd -r -d /opt/vault/keystore -s /bin/nologin vault || true
 
-#Set the ownership of /opt/vault/keystore to the vault user and the vault group
-install -o vault -g vault -m 750 -d /opt/vault/keystore
+grep "vault:" /etc/passwd >/dev/null
+if [ $? -ne 0 ]; then
+   useradd -r -d /opt/vault/keystore -s /bin/nologin vault
+   #Set the ownership of /opt/vault/keystore to the vault user and the vault group
+   install -o vault -g vault -m 750 -d /opt/vault/keystore
+fi
 
 VAULT_VER="${VAULT_VER:-1.1.3}"
 UNAME=$(uname -s |  tr '[:upper:]' '[:lower:]')
