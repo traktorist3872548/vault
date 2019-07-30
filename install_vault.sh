@@ -4,7 +4,7 @@ if [[ ! -d /opt/vault ]] ; then
     mkdir -p /opt/vault
 fi
 
-#create a vault system user
+echo 'create a vault system user'
 #/opt/vault/keystore  will be used as the Vault data directory to store encrypted secrets on the local filesystem
 
 grep "vault:" /etc/passwd >/dev/null
@@ -51,27 +51,26 @@ fi
 unzip ../download/${VAULT_ZIP}
 chmod a+x vault
 
-# check
-/opt/vault/vault --version
-
 # move binary to /opt/vault 
 mv ./vault /opt/vault/
 
-# check vault installation
+echo 'check vault installation'
 /opt/vault/vault -h
 
 cd ..
 pwd
-# copy vault config file to /etc folder
+echo 'copy vault config file to /etc folder'
 cp -r config/vault /etc/ 
+echo 'copy certificates to /opt/vault/ca'
+cp -r work/ca /opt/vault
 
-# set permissions
+echo 'set permissions'
 chown vault:vault /etc/vault/vault.hcl 
-chmod 640 /etc/vault/vault.hcl
+chmod 770 /etc/vault/vault.hcl
 chown vault:vault /opt/vault/
-chmod 640 /opt/vault/ 
+chmod 770 /opt/vault/ 
 
-# copy systemd unit file to /etc/systemd/system
+echo copy systemd unit file to /etc/systemd/system
 cp config/vault.service /etc/systemd/system/vault.service
 
 #add a rule in /etc/hosts to direct requests to Vault to localhost

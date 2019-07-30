@@ -2,13 +2,13 @@
 Description=a tool for managing secrets
 Documentation=https://vaultproject.io/docs/
 After=network.target
-ConditionFileNotEmpty=/etc/vault.hcl
+ConditionFileNotEmpty=/etc/vault/vault.hcl
 
 [Service]
 User=vault
 Group=vault
-#ExecStart=/usr/local/bin/vault server -config=/etc/vault.hcl
-ExecStart=/usr/local/bin/vault server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000" -dev-listen-address="0.0.0.0:8201" -config=/etc/vault.hcl 
+#ExecStart=/usr/local/bin/vault server -config=/etc/vault/vault.hcl
+ExecStart=/opt/vault/vault server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000" -dev-listen-address="0.0.0.0:8201" -config=/etc/vault/vault.hcl 
 ExecReload=/usr/local/bin/kill --signal HUP $MAINPID
 CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
 Capabilities=CAP_IPC_LOCK+ep
