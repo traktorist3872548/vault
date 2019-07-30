@@ -66,9 +66,9 @@ cp -r work/ca /opt/vault
 
 echo 'set permissions'
 chown vault:vault /etc/vault/vault.hcl 
-chmod 770 /etc/vault/vault.hcl
+chmod -R 770 /etc/vault/vault.hcl
 chown vault:vault /opt/vault/
-chmod 770 /opt/vault/ 
+chmod -R 770 /opt/vault/ 
 
 echo copy systemd unit file to /etc/systemd/system
 cp config/vault.service /etc/systemd/system/vault.service
