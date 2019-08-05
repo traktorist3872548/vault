@@ -8,6 +8,7 @@ ConditionFileNotEmpty=/etc/vault/vault.hcl
 User=vault
 Group=vault
 ExecStart=/opt/vault/vault server -log-level=debug -config=/etc/vault/vault.hcl
+ExecStartPost=/etc/vault/init.sh
 ExecReload=/usr/local/bin/kill --signal HUP $MAINPID
 CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
 Capabilities=CAP_IPC_LOCK+ep

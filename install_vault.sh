@@ -65,13 +65,11 @@ echo 'copy certificates to /opt/vault/ca'
 cp -r work/ca /opt/vault
 
 echo 'set permissions'
-chown vault:vault /etc/vault/vault.hcl 
-chmod 770 /etc/vault/vault.hcl
+chown vault:vault /etc/vault 
+chmod 770 /etc/vault
 chown -R vault:vault /opt/vault
 chmod -R 770 /opt/vault 
 
 echo copy systemd unit file to /etc/systemd/system
-cp config/vault.service /etc/systemd/system/vault.service
+mv config/vault.service /etc/systemd/system/vault.service
 
-#add a rule in /etc/hosts to direct requests to Vault to localhost
-#echo 127.0.0.1 $FQDN | tee -a /etc/hosts
