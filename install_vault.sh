@@ -59,17 +59,19 @@ echo 'check vault installation'
 
 cd ..
 pwd
+echo 'copy vault init script'
+cp -r ./init.sh /opt/vault
 echo 'copy vault config file to /etc folder'
 cp -r config/vault /etc/ 
 echo 'copy certificates to /opt/vault/ca'
 cp -r work/ca /opt/vault
 
 echo 'set permissions'
-chown vault:vault /etc/vault 
-chmod 770 /etc/vault
+chown -R vault:vault /etc/vault 
+chmod -R 770 /etc/vault
 chown -R vault:vault /opt/vault
 chmod -R 770 /opt/vault 
 
 echo copy systemd unit file to /etc/systemd/system
-mv config/vault.service /etc/systemd/system/vault.service
+cp config/vault.service /etc/systemd/system/vault.service
 
