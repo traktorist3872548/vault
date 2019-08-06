@@ -1,5 +1,5 @@
 #!/bin/bash
-#export VAULT_ADDR='https://localhost:8200'
+export VAULT_ADDR='https://localhost:8200'
 #export VAULT_CAPATH=/opt/vault/ca/certs/ca.cert.pem
 chown vault:vault /opt/vault/ca/certs/ca.cert.pem
 chmod 440 /opt/vault/ca/certs/ca.cert.pem
