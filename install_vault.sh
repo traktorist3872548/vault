@@ -60,7 +60,7 @@ echo 'check vault installation'
 cd ..
 pwd
 echo 'copy vault init script'
-cp -r ./init.sh /opt/vault
+cp -r ./poststart.sh /opt/vault
 echo 'copy vault config file to /etc folder'
 cp -r config/vault /etc/ 
 echo 'copy certificates to /opt/vault/ca'
