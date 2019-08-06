@@ -4,8 +4,7 @@
 chown vault:vault /opt/vault/ca/certs/ca.cert.pem
 chmod 440 /opt/vault/ca/certs/ca.cert.pem
 
-#if [[ ! -f /etc/vault/init.file && -s "/etc/vault/init.file" ]];
-if [[ ! -s "/etc/vault/init.file" ]];
+if [[ ! -f /etc/vault/init.file || ! -s "/etc/vault/init.file" ]];
 then
     echo "init.file not exist or empty, creating init.file"
     /opt/vault/vault operator init -key-shares=1 -key-threshold=1 | tee /etc/vault/init.file
