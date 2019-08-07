@@ -70,6 +70,8 @@ chown -R vault:vault /etc/vault
 chmod -R 770 /etc/vault
 chown -R vault:vault /opt/vault
 chmod -R 770 /opt/vault 
+chown vault:vault /opt/vault/ca/certs/ca.cert.pem
+chmod 440 /opt/vault/ca/certs/ca.cert.pem
 
 echo copy systemd unit file to /usr/lib/systemd/system
 cp config/vault.service /usr/lib/systemd/system/vault.service
