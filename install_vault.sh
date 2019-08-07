@@ -75,4 +75,4 @@ chmod 440 /opt/vault/ca/certs/ca.cert.pem
 
 echo copy systemd unit file to /usr/lib/systemd/system
 cp config/vault.service /usr/lib/systemd/system/vault.service
-
+systemctl daemon-reload
