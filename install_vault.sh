@@ -18,7 +18,6 @@ VAULT_VER="${VAULT_VER:-1.1.3}"
 UNAME=$(uname -s |  tr '[:upper:]' '[:lower:]')
 VAULT_ZIP="vault_${VAULT_VER}_${UNAME}_amd64.zip"
 IGNORE_CERTS="${IGNORE_CERTS:-no}"
-FQDN="$(hostname -f)"
 
 # cleanup
 mkdir -p vault
@@ -72,6 +71,6 @@ chmod -R 770 /etc/vault
 chown -R vault:vault /opt/vault
 chmod -R 770 /opt/vault 
 
-echo copy systemd unit file to /etc/systemd/system
-cp config/vault.service /etc/systemd/system/vault.service
+echo copy systemd unit file to /usr/lib/systemd/system
+cp config/vault.service /usr/lib/systemd/system/vault.service
 

@@ -12,5 +12,6 @@ listener "tcp" {
   tls_min_version = "tls10"  
 }
 
+api_addr = "http://localhost:8200"
 disable_mlock = true
 ui = true
