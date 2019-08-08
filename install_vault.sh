@@ -75,4 +75,8 @@ chmod 440 /opt/vault/ca/certs/ca.cert.pem
 
 echo copy systemd unit file to /usr/lib/systemd/system
 cp config/vault.service /usr/lib/systemd/system/vault.service
+mkdir -p /etc/systemd/system/vault.service.d
+echo [Service] > /etc/systemd/system/vault.service.d/override.conf
+echo Environment=VAULT_ADDR='https://localhost:8200' >> /etc/systemd/system/vault.service.d/override.conf
+echo Environment=VAULT_CAPATH=/opt/vault/ca/certs/ca.cert.pem >> /etc/systemd/system/vault.service.d/override.conf
 systemctl daemon-reload
