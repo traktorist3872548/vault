@@ -14,8 +14,6 @@ export VAULT_TOKEN=$(egrep -m5 '^Initial Root Token' /etc/vault/init.file | cut 
 
 #add env var via systemd override
 echo Environment=VAULT_TOKEN=${VAULT_TOKEN} >> /etc/systemd/system/vault.service.d/override.conf
-chown vault:vault /etc/systemd/system/vault.service.d/override.conf
-chmod 770 /etc/systemd/system/vault.service.d/override.conf
 systemctl daemon-reload
 systemctl stop vault
 systemctl start vault
