@@ -67,9 +67,9 @@ cp -r work/ca /opt/vault
 
 echo 'set permissions'
 chown -R vault:vault /etc/vault 
-chmod -R 770 /etc/vault
+chmod -R 775 /etc/vault
 chown -R vault:vault /opt/vault
-chmod -R 770 /opt/vault 
+chmod -R 775 /opt/vault 
 chown vault:vault /opt/vault/ca/certs/ca.cert.pem
 chmod 440 /opt/vault/ca/certs/ca.cert.pem
 
