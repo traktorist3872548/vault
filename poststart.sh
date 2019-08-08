@@ -1,8 +1,5 @@
 #!/bin/bash
 export VAULT_ADDR='https://localhost:8200'
-#export VAULT_CAPATH=/opt/vault/ca/certs/ca.cert.pem
-#chown vault:vault /opt/vault/ca/certs/ca.cert.pem
-#chmod 440 /opt/vault/ca/certs/ca.cert.pem
 
 if [[ ! -f /etc/vault/init.file || ! -s "/etc/vault/init.file" ]];
 then
@@ -17,7 +14,11 @@ export VAULT_TOKEN=$(egrep -m5 '^Initial Root Token' /etc/vault/init.file | cut 
 
 #add env var via systemd override
 echo Environment=VAULT_TOKEN=${VAULT_TOKEN} >> /etc/systemd/system/vault.service.d/override.conf
+chown vault:vault /etc/systemd/system/vault.service.d/override.conf
+chmod 770 /etc/systemd/system/vault.service.d/override.conf
 systemctl daemon-reload
+systemctl stop vault
+systemctl start vault
 
 echo 'unseals the vault'
 egrep -m3 '^Unseal Key' /etc/vault/init.file | cut -f2- -d: | tr -d ' ' | while read key; do   /opt/vault/vault operator unseal ${key}; done
