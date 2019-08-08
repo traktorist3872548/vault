@@ -1,4 +1,3 @@
-cd ~/vault-deploy
 systemctl stop vault
 rm -f /usr/lib/systemd/system/vault.service
 systemctl daemon-reload
