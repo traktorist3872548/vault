@@ -15,13 +15,13 @@
 
 #stage ('Checkout/Prebuild')
 #git clone https://github.com/traktorist3872548/vault.git
-cd vault
+#cd vault
 
 #cleanup
 rm -rf {build,dist,vault,download} || true
 
 #create build folders
-mkdir -p {build/opt/vault,build/etc/vault,dist,vault,download}
+mkdir -p {build/opt/vault,dist,vault,download}
 
 #install vault to build dest folder
 VAULT_VER="${VAULT_VER:-1.1.3}"
@@ -43,11 +43,10 @@ cd ../vault
 unzip ../download/${VAULT_ZIP}
 chmod a+x vault
 cd ..
-mv vault/vault build/opt/vault
-cp -r ./poststart.sh build/opt/vault
-cp -r config/vault build/etc/
+cp -r  vault/vault build/opt/vault
+cp -r config build/opt/vault
+cp -r certs build/opt/vault
 
-#create certificates shold do after_install script
 #build rpm using fpm util
 fpm -v 1.0 \
 --before-install ./pack-inst-scrpt/before_install.sh \
