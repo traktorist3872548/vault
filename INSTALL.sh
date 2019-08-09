@@ -14,24 +14,20 @@
 #----------------------------- THE SCRIPT WHICH WILL BE CONVERTED TO JENKINSJOB--------------
 
 #stage ('Checkout/Prebuild')
-git clone https://github.com/traktorist3872548/vault.git
+#git clone https://github.com/traktorist3872548/vault.git
+cd vault
 
 #cleanup
-rm -rf {build,dist} || true
+rm -rf {build,dist,vault,download} || true
 
 #create build folders
-mkdir -p {build/opt/vault,dist}
-mkdir -p /etc/vault
+mkdir -p {build/opt/vault,build/etc/vault,dist,vault,download}
 
 #install vault to build dest folder
 VAULT_VER="${VAULT_VER:-1.1.3}"
 UNAME=$(uname -s |  tr '[:upper:]' '[:lower:]')
 VAULT_ZIP="vault_${VAULT_VER}_${UNAME}_amd64.zip"
 IGNORE_CERTS="${IGNORE_CERTS:-no}"
-
-# cleanup
-mkdir -p vault
-mkdir -p download
 
 cd download
 # install Vault
@@ -47,8 +43,8 @@ cd ../vault
 unzip ../download/${VAULT_ZIP}
 chmod a+x vault
 cd ..
-mv vault/vault opt/valt
-cp -r ./poststart.sh /opt/vault
-cp -r config/vault /etc/
+mv vault/vault build/opt/vault
+cp -r ./poststart.sh build/opt/vault
+cp -r config/vault build/etc/
 
 #create certificates shold do after_install script
