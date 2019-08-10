@@ -1,17 +1,4 @@
 #!/bin/bash
-#------------------------------- THAT WAS FIRST EXAMPLE OF BUILD-----------------------------
-#echo "create certificates"
-#sh ./create_certificates.sh
-#echo "install vault as service"
-#sh ./install_vault.sh
-#echo "vault initializing"
-#sh ./init.sh
-#systemctl enable vault
-#systemctl start vault
-#systemctl status vault
-#/opt/vault/vault status
-
-#----------------------------- THE SCRIPT WHICH WILL BE CONVERTED TO JENKINSJOB--------------
 
 #stage ('Checkout/Prebuild')
 #git clone https://github.com/traktorist3872548/vault.git
@@ -43,24 +30,9 @@ cd ../vault
 unzip ../download/${VAULT_ZIP}
 chmod a+x vault
 cd ..
-cp -r  vault/vault build/opt/vault
-cp -r config build/opt/vault
-cp -r certs build/opt/vault
+cp -r ./vault/vault build/opt/vault
+cp -r ./config build/opt/vault
+cp -r ./certs build/opt/vault
 
 #build rpm using fpm util
-fpm -v 1.0 \
---before-install ./pack-inst-scrpt/before_install.sh \
---after-install ./pack-inst-scrpt/after_install.sh \
---after-remove ./pack-inst-scrpt/after_remove.sh \
---before-upgrade ./pack-inst-scrpt/before_upgrade.sh \
---after-upgrade ./pack-inst-scrpt/after_upgrade.sh \
---rpm-user vault \
---rpm-group vault \
---package dist \
---force \
---debug \
--s dir \
--t rpm \
--n vault \
---prefix /opt/vault\
---config-files /etc/vault/vault.hcl
+fpm -s dir -t rpm -n astra-vault -v 4.0 --config-files build/opt/vault/config/vault.hcl --before-install ./pack-inst-scrpt/before_install.sh --after-install ./pack-inst-scrpt/after_install.sh --after-remove ./pack-inst-scrpt/after_remove.sh --before-upgrade ./pack-inst-scrpt/before_upgrade.sh --after-upgrade ./pack-inst-scrpt/after_upgrade.sh --rpm-user vault --rpm-group vault --force ./dist/=/

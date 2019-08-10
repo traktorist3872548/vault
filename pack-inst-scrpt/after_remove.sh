@@ -14,5 +14,6 @@ elif [ $DEBIAN_VAULT_SRV ]; then
    systemctl daemon-reload
 else
    echo 'vault.service does not exist'
+   rm -rf $REDHAT_VAULT_SRV $INSTALL_PATH $CONFIG_PATH
 fi
 
