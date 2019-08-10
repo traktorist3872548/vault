@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -d "/usr/lib/systemd/system/" ]
 then
-    cp /opt/tagml/vault.service /usr/lib/systemd/system/vault.service
+    cp /opt/vault/vault.service /usr/lib/systemd/system/vault.service
 else
     cp /opt/vault/vault.service /lib/systemd/system/vault.service
 fi
