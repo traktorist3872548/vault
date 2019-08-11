@@ -48,3 +48,15 @@ cp -r ./poststart.sh build/opt/vault
 cp -r config/vault build/etc/
 
 #create certificates shold do after_install script
+fpm -v 1.0 \
+--before-install ./pack-inst-scrpt/before_install.sh \
+--after-install ./pack-inst-scrpt/after_install.sh \
+--after-remove ./pack-inst-scrpt/after_remove.sh \
+--before-upgrade ./pack-inst-scrpt/before_upgrade.sh \
+--after-upgrade ./pack-inst-scrpt/after_upgrade.sh \
+-s dir /opt/vault /etc/vault \
+--log debug \
+--rpm-user vault --rpm-group vault \
+--config-files /etc/vault/vault.hcl \
+--force --package \
+dist -s virtualenv -t rpm --name vault --prefix /opt/vault
