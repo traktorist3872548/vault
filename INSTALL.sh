@@ -31,4 +31,4 @@ mkdir -p {build/opt/vault,build/usr/lib/systemd/system,dist,vault}
 cp -r {vault/vault,vault.hcl,unseal.sh} ./build/opt/vault/
 cp -r vault.service ./build/usr/lib/systemd/system/
 #build rpm using fpm util
-fpm -s dir -t rpm -n vault -v 2.3 --config-files build/opt/vault/vault.hcl --before-install ./pack-inst-scrpt/before_install.sh --after-install ./pack-inst-scrpt/after_install.sh --after-remove ./pack-inst-scrpt/after_remove.sh --before-upgrade ./pack-inst-scrpt/before_upgrade.sh --after-upgrade ./pack-inst-scrpt/after_upgrade.sh --rpm-user vault --rpm-group vault --force ./build/=/
+fpm -s dir -t rpm -n vault -v 2.4 --config-files build/opt/vault/vault.hcl --before-install ./pack-inst-scrpt/before_install.sh --after-install ./pack-inst-scrpt/after_install.sh --after-remove ./pack-inst-scrpt/after_remove.sh --before-upgrade ./pack-inst-scrpt/before_upgrade.sh --after-upgrade ./pack-inst-scrpt/after_upgrade.sh --rpm-user vault --rpm-group vault --force ./build/=/

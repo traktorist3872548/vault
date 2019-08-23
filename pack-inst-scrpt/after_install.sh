@@ -11,6 +11,6 @@ nohup /opt/vault/vault server -config=/opt/vault/vault.hcl &
 /opt/vault/vault operator init -key-shares=1 -key-threshold=1 | tee /opt/vault/init.file
 export VAULT_TOKEN=$(egrep -m5 '^Initial Root Token' /opt/vault/init.file | cut -f2- -d: | tr -d ' ')
 echo Environment=VAULT_TOKEN=${VAULT_TOKEN} >> /etc/systemd/system/vault.service.d/override.conf
-chmod -R 770 /opt/vault/init.file
-chown -R vault:vault /opt/vault/init.file
+chmod -R 770 /opt/vault
+chown -R vault:vault /opt/vault
 systemctl daemon-reload
