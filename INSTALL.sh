@@ -2,31 +2,32 @@
 export PATH=$PATH:/usr/local/bin/
 
 #cleanup
-rm -rf {build,dist,vault,download} || true
+#rm -rf {build,dist,vault,download} || true
+rm -rf {build,dist} || true
 
 #create build folders
-mkdir -p {build/opt/vault,build/usr/lib/systemd/system,dist,vault,download}
+mkdir -p {build/opt/vault,build/usr/lib/systemd/system,dist,vault}
 
 #install vault to build dest folder
-VAULT_VER="${VAULT_VER:-1.1.3}"
-UNAME=$(uname -s |  tr '[:upper:]' '[:lower:]')
-VAULT_ZIP="vault_${VAULT_VER}_${UNAME}_amd64.zip"
-IGNORE_CERTS="${IGNORE_CERTS:-no}"
+#VAULT_VER="${VAULT_VER:-1.1.3}"
+#UNAME=$(uname -s |  tr '[:upper:]' '[:lower:]')
+#VAULT_ZIP="vault_${VAULT_VER}_${UNAME}_amd64.zip"
+#IGNORE_CERTS="${IGNORE_CERTS:-no}"
 
-cd download
+#cd download
 # install Vault
-    if [[ "${IGNORE_CERTS}" == "no" ]] ; then
-      echo "Downloading Vault with certs verification"
-      curl https://releases.hashicorp.com/vault/${VAULT_VER}/${VAULT_ZIP} -o ${VAULT_ZIP}
-    else
-      echo "Downloading Vault WITHOUT certs verification"
-      curl -k https://releases.hashicorp.com/vault/${VAULT_VER}/${VAULT_ZIP} -o ${VAULT_ZIP}
-    fi
+#    if [[ "${IGNORE_CERTS}" == "no" ]] ; then
+#      echo "Downloading Vault with certs verification"
+#      curl https://releases.hashicorp.com/vault/${VAULT_VER}/${VAULT_ZIP} -o ${VAULT_ZIP}
+#    else
+#      echo "Downloading Vault WITHOUT certs verification"
+#      curl -k https://releases.hashicorp.com/vault/${VAULT_VER}/${VAULT_ZIP} -o ${VAULT_ZIP}
+#    fi
 
-cd ../vault
-unzip ../download/${VAULT_ZIP}
-chmod a+x vault
-cd ..
+#cd ../vault
+#unzip ../download/${VAULT_ZIP}
+#chmod a+x vault
+#cd ..
 cp -r {vault/vault,vault.hcl} ./build/opt/vault/
 cp -r vault.service ./build/usr/lib/systemd/system/
 #build rpm using fpm util
