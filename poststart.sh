@@ -1,5 +1,5 @@
 #!/bin/bash
-export VAULT_ADDR='https://localhost:8200'
+export VAULT_ADDR='http://127.0.0.1:8200'
 
 if [[ ! -f /opt/vault/init.file || ! -s "/opt/vault/init.file" ]];
 then

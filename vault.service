@@ -5,8 +5,7 @@ After=network.target
 ConditionFileNotEmpty=/opt/vault/vault.hcl
 
 [Service]
-Environment=VAULT_ADDR='https://localhost:8200'
-Environment=VAULT_CAPATH=/opt/vault/ca/certs/ca.cert.pem
+Environment=VAULT_ADDR='http://0.0.0.0:8200'
 User=vault
 Group=vault
 ExecStart=/opt/vault/vault server -log-level=debug -config=/opt/vault/vault.hcl

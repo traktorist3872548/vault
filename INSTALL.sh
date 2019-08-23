@@ -1,14 +1,11 @@
 #!/bin/bash
 
-#stage ('Checkout/Prebuild')
-#git clone https://github.com/traktorist3872548/vault.git
-#cd vault
 
 #cleanup
 rm -rf {build,dist,vault,download} || true
 
 #create build folders
-mkdir -p {build/opt/vault,dist,vault,download}
+mkdir -p {build/opt/vault,build/usr/lib/systemd/system,dist,vault,download}
 
 #install vault to build dest folder
 VAULT_VER="${VAULT_VER:-1.1.3}"
@@ -30,7 +27,7 @@ cd ../vault
 unzip ../download/${VAULT_ZIP}
 chmod a+x vault
 cd ..
-cp -r {vault/vault,vault.hcl,vault.service,poststart.sh,certs} ./build/opt/vault/
-
+cp -r {vault/vault,vault.hcl,poststart.sh} ./build/opt/vault/
+cp -r vault.service ./build/usr/lib/systemd/system/
 #build rpm using fpm util
-fpm -s dir -t rpm -n astra-vault -v 6.0 --config-files build/opt/vault/vault.hcl --before-install ./pack-inst-scrpt/before_install.sh --after-install ./pack-inst-scrpt/after_install.sh --after-remove ./pack-inst-scrpt/after_remove.sh --before-upgrade ./pack-inst-scrpt/before_upgrade.sh --after-upgrade ./pack-inst-scrpt/after_upgrade.sh --rpm-user vault --rpm-group vault --force ./build/=/
+fpm -s dir -t rpm -n astra-vault -v 7.0 --config-files build/opt/vault/vault.hcl --before-install ./pack-inst-scrpt/before_install.sh --after-install ./pack-inst-scrpt/after_install.sh --after-remove ./pack-inst-scrpt/after_remove.sh --before-upgrade ./pack-inst-scrpt/before_upgrade.sh --after-upgrade ./pack-inst-scrpt/after_upgrade.sh --rpm-user vault --rpm-group vault --force ./build/=/
