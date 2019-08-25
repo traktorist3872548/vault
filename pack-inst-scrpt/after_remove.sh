@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 systemctl stop vault
 /usr/sbin/userdel vault
 REDHAT_VAULT_SRV='/usr/lib/systemd/system/vault.service'
@@ -14,6 +14,5 @@ elif [ $DEBIAN_VAULT_SRV ]; then
    systemctl daemon-reload
 else
    echo 'vault.service does not exist'
-   rm -rf $REDHAT_VAULT_SRV $DEBIAN_VAULT_SRV $INSTALL_PATH $REDHAT_VAULT_SRV_OVERRIDE
 fi
 
