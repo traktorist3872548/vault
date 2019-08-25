@@ -9,7 +9,6 @@ Environment=VAULT_ADDR='http://0.0.0.0:8200'
 User=vault
 Group=vault
 ExecStart=/opt/vault/vault server -log-level=debug -config=/opt/vault/vault.hcl
-ExecStartPost=/bin/sh -c '/opt/vault/poststart.sh'
 ExecReload=/usr/local/bin/kill --signal HUP $MAINPID
 CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
 Capabilities=CAP_IPC_LOCK+ep
