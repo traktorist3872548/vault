@@ -1,3 +1,4 @@
+#!/bin/bash -x
 systemctl stop vault
 systemctl daemon-reload
 
