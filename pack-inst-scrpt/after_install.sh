@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 export VAULT_ADDR='http://0.0.0.0:8200'
 chmod -R 770 /opt/vault
 chown -R vault:vault /opt/vault
