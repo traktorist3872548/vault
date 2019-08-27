@@ -1,6 +1,6 @@
 
 #!/bin/bash -x
-export VAULT_ADDR='http://0.0.0.0:8200'
+export VAULT_ADDR='http://127.0.0.1:8200'
 chmod -R 777 /opt/vault
 chown -R vault:vault /opt/vault
 mkdir -p /etc/systemd/system/vault.service.d
