@@ -28,7 +28,7 @@ mkdir -p {build/opt/vault,build/usr/lib/systemd/system,dist,vault}
 #unzip ../download/${VAULT_ZIP}
 #chmod a+x vault
 #cd ..
-cp -r {vault/vault,vault.hcl,unseal.sh,setup_vault_data.sh,read-secret-policy.conf} ./build/opt/vault/
+cp -r {vault/vault,vault.hcl} ./build/opt/vault/
 cp -r vault.service ./build/usr/lib/systemd/system/
 #build rpm using fpm util
 fpm -s dir -t rpm -n vault -v 3.3 --config-files build/opt/vault/vault.hcl --before-install ./pack-inst-scrpt/before_install.sh --after-install ./pack-inst-scrpt/after_install.sh --before-remove ./pack-inst-scrpt/before_remove.sh --after-remove ./pack-inst-scrpt/after_remove.sh --before-upgrade ./pack-inst-scrpt/before_upgrade.sh --after-upgrade ./pack-inst-scrpt/after_upgrade.sh --rpm-user vault --rpm-group vault --force ./build/=/
