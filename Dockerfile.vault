@@ -1,0 +1,8 @@
+FROM centos:centos7
+RUN mkdir /opt/vault
+RUN useradd -r -d /opt/vault/keystore -s /bin/nologin vault
+RUN chown -R vault:vault /opt/vault
+RUN chmod -R 770 /opt/vault
+ADD ./vault/vault /opt/vault
+ADD ./vault.hcl /opt/vault
+ENTRYPOINT /opt/vault/vault server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000" -config=/opt/vault/vault.hcl
